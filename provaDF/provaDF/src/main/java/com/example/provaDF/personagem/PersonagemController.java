@@ -45,7 +45,7 @@ public class PersonagemController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{idPersonagem}/itens")
+    @GetMapping("/{idPersonagem}/item")
     public ResponseEntity<List<ItemMagicoModel>> listarItensPorPersonagem(@PathVariable Long idPersonagem) {
         return ResponseEntity.ok(personagemService.listarItensPorPersonagem(idPersonagem));
     }
