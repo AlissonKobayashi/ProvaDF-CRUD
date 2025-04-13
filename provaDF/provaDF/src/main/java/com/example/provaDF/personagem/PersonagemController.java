@@ -1,10 +1,12 @@
 package com.example.provaDF.personagem;
 
+import com.example.provaDF.itemMagico.ItemMagicoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/personagem")
@@ -41,5 +43,28 @@ public class PersonagemController {
     public ResponseEntity<Void> deletePersonagem(@PathVariable Long id){
         personagemService.excluirPersonagem(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{idPersonagem}/itens")
+    public ResponseEntity<List<ItemMagicoModel>> listarItensPorPersonagem(@PathVariable Long idPersonagem) {
+        return ResponseEntity.ok(personagemService.listarItensPorPersonagem(idPersonagem));
+    }
+
+    @PostMapping("/{idPersonagem}/item/{idItem}")
+    public ResponseEntity<Void> adicionarItemMagico(@PathVariable Long idPersonagem, @PathVariable Long idItem) {
+        personagemService.adicionarItemMagico(idPersonagem, idItem);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{idPersonagem}/item/{idItem}")
+    public ResponseEntity<Void> removerItemMagico(@PathVariable Long idPersonagem, @PathVariable Long idItem) {
+        personagemService.removerItemMagico(idPersonagem, idItem);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{idPersonagem}/amuleto")
+    public ResponseEntity<ItemMagicoModel> buscarAmuleto(@PathVariable Long idPersonagem) {
+        Optional<ItemMagicoModel> amuleto = personagemService.buscarAmuletoDoPersonagem(idPersonagem);
+        return amuleto.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 }

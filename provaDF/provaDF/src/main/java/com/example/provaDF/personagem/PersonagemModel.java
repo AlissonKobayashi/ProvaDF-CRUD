@@ -15,15 +15,11 @@ public class PersonagemModel {
     private Long id;
     private String nome;
     private String nomeAventureiro;
-
     @Enumerated(EnumType.STRING)
     private PersonagemEnum classe;
-
     private int level;
-
     @OneToMany
     private List<ItemMagicoModel> listaItensMagico = new ArrayList<>();
-
     private int forca;
     private int defesa;
 
