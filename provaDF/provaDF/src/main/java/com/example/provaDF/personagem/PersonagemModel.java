@@ -1,6 +1,10 @@
 package com.example.provaDF.personagem;
 
+import com.example.provaDF.itemMagico.ItemMagicoModel;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_PERSONAGEM")
@@ -11,28 +15,67 @@ public class PersonagemModel {
     private Long id;
     private String nome;
     private String nomeAventureiro;
+
     @Enumerated(EnumType.STRING)
     private PersonagemEnum classe;
+
     private int level;
-    private String listaItensMagico;
+
+    @OneToMany
+    private List<ItemMagicoModel> listaItensMagico = new ArrayList<>();
+
     private int forca;
     private int defesa;
 
-    public PersonagemModel(){}
+    public PersonagemModel() {}
 
-    public PersonagemModel(Long id, String nome, String nomeAventureiro, PersonagemEnum classe, int level, String listaItensMagico, int forca, int defesa) {
+    public PersonagemModel(Long id, String nome, String nomeAventureiro, PersonagemEnum classe, int level, List<ItemMagicoModel> listaItensMagico, int forca, int defesa) {
         this.id = id;
         this.nome = nome;
         this.nomeAventureiro = nomeAventureiro;
         this.classe = classe;
         this.level = level;
         this.listaItensMagico = listaItensMagico;
-        this.forca = forca;
-        this.defesa = defesa;
 
-        if (forca < 0 || defesa < 0 || (forca + defesa) > 10){
-            throw new IllegalArgumentException("A soma de Força e Defesa não pode passar de 10 pontos.");
+        setForca(forca);
+        setDefesa(defesa);
+        validarUnicoAmuleto();
+    }
+
+    private void validarForcaEDefesa(int forca, int defesa) {
+        if (forca < 0 || defesa < 0 || (forca + defesa) > 10) {
+            throw new IllegalArgumentException("A soma de Força e Defesa deve ser no máximo 10 pontos e valores não podem ser negativos.");
         }
+    }
+
+    private void setForca(int forca) {
+        validarForcaEDefesa(forca, this.defesa);
+        this.forca = forca;
+    }
+
+    private void setDefesa(int defesa) {
+        validarForcaEDefesa(this.forca, defesa);
+        this.defesa = defesa;
+    }
+
+    private void validarUnicoAmuleto() {
+        long amuletos = listaItensMagico.stream()
+                .filter(item -> item.getTipoItem().toString().equals("AMULETO"))
+                .count();
+
+        if (amuletos > 1) {
+            throw new IllegalArgumentException("O personagem só pode ter um item mágico do tipo AMULETO.");
+        }
+    }
+
+    public int getForcaTotal() {
+        int bonus = listaItensMagico.stream().mapToInt(ItemMagicoModel::getForca).sum();
+        return forca + bonus;
+    }
+
+    public int getDefesaTotal() {
+        int bonus = listaItensMagico.stream().mapToInt(ItemMagicoModel::getDefesa).sum();
+        return defesa + bonus;
     }
 
     public Long getId() {
@@ -75,11 +118,11 @@ public class PersonagemModel {
         this.level = level;
     }
 
-    public String getListaItensMagico() {
+    public List<ItemMagicoModel> getListaItensMagico() {
         return listaItensMagico;
     }
 
-    public void setListaItensMagico(String listaItensMagico) {
+    public void setListaItensMagico(List<ItemMagicoModel> listaItensMagico) {
         this.listaItensMagico = listaItensMagico;
     }
 
@@ -87,15 +130,7 @@ public class PersonagemModel {
         return forca;
     }
 
-    public void setForca(int forca) {
-        this.forca = forca;
-    }
-
     public int getDefesa() {
         return defesa;
-    }
-
-    public void setDefesa(int defesa) {
-        this.defesa = defesa;
     }
 }

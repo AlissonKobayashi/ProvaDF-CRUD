@@ -25,6 +25,7 @@ public class ItemMagicoService {
 
     @PostMapping
     public ItemMagicoModel criarItemMagico(ItemMagicoModel itemMagicoModel){
+        itemMagicoModel.validar();
         return itemMagicoRepository.save(itemMagicoModel);
     }
 

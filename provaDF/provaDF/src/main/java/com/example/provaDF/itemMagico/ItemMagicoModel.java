@@ -1,6 +1,5 @@
 package com.example.provaDF.itemMagico;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -16,7 +15,7 @@ public class ItemMagicoModel {
     private int forca;
     private int defesa;
 
-    public ItemMagicoModel(){}
+    public ItemMagicoModel() {}
 
     public ItemMagicoModel(Long id, String nome, ItemMagicoEnum tipoItem, int forca, int defesa) {
         this.id = id;
@@ -25,22 +24,21 @@ public class ItemMagicoModel {
         this.forca = forca;
         this.defesa = defesa;
 
+        validar();
+    }
+
+    public void validar() {
         if (forca < 0 || defesa < 0 || forca > 10 || defesa > 10) {
             throw new IllegalArgumentException("Força e Defesa devem estar entre 0 e 10.");
-        }
-
-        if (forca == 0 && defesa == 0) {
+        }if (forca == 0 && defesa == 0) {
             throw new IllegalArgumentException("Item não pode ter Força e Defesa iguais a zero.");
-        }
-
-        if (tipoItem == ItemMagicoEnum.ARMA && defesa != 0) {
+        }if (tipoItem == ItemMagicoEnum.ARMA && defesa != 0) {
             throw new IllegalArgumentException("Itens do tipo ARMA devem ter defesa igual a zero.");
-        }
-
-        if (tipoItem == ItemMagicoEnum.ARMADURA && forca != 0) {
+        }if (tipoItem == ItemMagicoEnum.ARMADURA && forca != 0) {
             throw new IllegalArgumentException("Itens do tipo ARMADURA devem ter força igual a zero.");
+        }if (tipoItem != ItemMagicoEnum.ARMA && tipoItem != ItemMagicoEnum.ARMADURA && tipoItem != ItemMagicoEnum.AMULETO) {
+            throw new IllegalArgumentException("Tipo de item inválido. Só pode ser ARMA, ARMADURA ou AMULETO.");
         }
-
     }
 
     public Long getId() {

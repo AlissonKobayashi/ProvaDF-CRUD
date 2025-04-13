@@ -27,6 +27,7 @@ public class ItemMagicoController {
 
     @PostMapping
     public ResponseEntity<ItemMagicoModel> createItem(@RequestBody ItemMagicoModel itemMagicoModel){
+        itemMagicoModel.validar();
         ItemMagicoModel itemMagicoModel1 = itemMagicoService.criarItemMagico(itemMagicoModel);
         return ResponseEntity.ok().body(itemMagicoModel1);
     }
