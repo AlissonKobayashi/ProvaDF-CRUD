@@ -1,12 +1,12 @@
 PERSONAGENS:
 
-path: http://localhost:8080/personagem
 
-GET MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
+
+GET MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem
 
 GET MAPPING POR ID - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
 
-POST MAPPING - FUNCIONANDO- > path: http://localhost:8080/personagem/{id}
+POST MAPPING - FUNCIONANDO- > path: http://localhost:8080/personagem
 
 PUT MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
 
