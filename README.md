@@ -1,13 +1,21 @@
 PERSONAGENS:
 
 {
+
   "nome": "Leonas",
+  
   "nomeAventureiro": "SPARTANOS",
+  
   "classe": "GUERREIRO",
+  
   "level": 120,
+  
   "listaItensMagico": [],
+  
   "forca": 4,
+  
   "defesa": 6
+  
 }
 
 GET MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem
@@ -26,11 +34,17 @@ DELETE MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
 ITEM MAGICO:
 
 {  
+
   "nome": "ARCO", 
+  
   "tipoItem": "ARMA",
+  
   "forca": 3, 
+  
   "defesa": 0
+  
 }
+
 
 GET MAPPING - FUNCIONANDO -> path: http://localhost:8080/itemMagico
 
