@@ -11,7 +11,8 @@ public class PersonagemModel {
     private Long id;
     private String nome;
     private String nomeAventureiro;
-    private String classe;
+    @Enumerated(EnumType.STRING)
+    private PersonagemEnum classe;
     private int level;
     private String listaItensMagico;
     private int forca;
@@ -19,7 +20,7 @@ public class PersonagemModel {
 
     public PersonagemModel(){}
 
-    public PersonagemModel(Long id, String nome, String nomeAventureiro, String classe, int level, String listaItensMagico, int forca, int defesa) {
+    public PersonagemModel(Long id, String nome, String nomeAventureiro, PersonagemEnum classe, int level, String listaItensMagico, int forca, int defesa) {
         this.id = id;
         this.nome = nome;
         this.nomeAventureiro = nomeAventureiro;
@@ -28,6 +29,10 @@ public class PersonagemModel {
         this.listaItensMagico = listaItensMagico;
         this.forca = forca;
         this.defesa = defesa;
+
+        if (forca < 0 || defesa < 0 || (forca + defesa) > 10){
+            throw new IllegalArgumentException("A soma de Força e Defesa não pode passar de 10 pontos.");
+        }
     }
 
     public Long getId() {
@@ -54,11 +59,11 @@ public class PersonagemModel {
         this.nomeAventureiro = nomeAventureiro;
     }
 
-    public String getClasse() {
+    public PersonagemEnum getClasse() {
         return classe;
     }
 
-    public void setClasse(String classe) {
+    public void setClasse(PersonagemEnum classe) {
         this.classe = classe;
     }
 

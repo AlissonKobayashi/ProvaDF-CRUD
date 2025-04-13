@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/personagem")
@@ -15,29 +14,31 @@ public class PersonagemController {
     private PersonagemService personagemService;
 
     @GetMapping
-    private List<PersonagemModel> listarAll(){
+    public List<PersonagemModel> listarAll(){
         return personagemService.listarAll();
     }
 
     @GetMapping("/{id}")
-    private Optional<PersonagemModel> listarById(@RequestParam Long id){
-        return personagemService.listarById(id);
+    public ResponseEntity<PersonagemModel> listarById(@PathVariable Long id){
+        return personagemService.listarById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    private ResponseEntity<PersonagemModel> criarPersonagem(@RequestBody PersonagemModel personagemModel){
+    public ResponseEntity<PersonagemModel> criarPersonagem(@RequestBody PersonagemModel personagemModel){
         PersonagemModel personagemModel1 = personagemService.criarPersonagem(personagemModel);
         return ResponseEntity.ok().body(personagemModel1);
     }
 
     @PutMapping("/{id}")
-    private ResponseEntity<Void> editPersonagem(@RequestParam Long id, @RequestBody PersonagemModel personagemModel){
+    public ResponseEntity<Void> editPersonagem(@PathVariable Long id, @RequestBody PersonagemModel personagemModel){
         personagemService.editarPersonagem(id, personagemModel);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    private ResponseEntity<Void> deletePersonagem(@RequestParam Long id){
+    public ResponseEntity<Void> deletePersonagem(@PathVariable Long id){
         personagemService.excluirPersonagem(id);
         return ResponseEntity.noContent().build();
     }

@@ -1,7 +1,6 @@
 package com.example.provaDF.personagem;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +30,7 @@ public class PersonagemService {
 
     @PutMapping("/{id}")
     public void editarPersonagem(Long id, PersonagemModel personagemModel){
+        personagemModel.setId(id);
         personagemRepository.save(personagemModel);
     }
 
