@@ -2,44 +2,28 @@ PERSONAGENS:
 
 path: http://localhost:8080/personagem
 
-MODEL - CRIADO
+GET MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
 
-SERVICE - CRIADO
+GET MAPPING POR ID - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
 
-CONTROLLER - CRIADO
+POST MAPPING - FUNCIONANDO- > path: http://localhost:8080/personagem/{id}
 
-REPOSITORY - CRIADO
+PUT MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
 
-GET MAPPING - FUNCIONANDO
+DELETE MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
 
-GET MAPPING POR ID - CRIADO (PRECISA DE ALTERAÇÕES PARA FUNCIONAR A LISTAGEM POR ID)
-
-POST MAPPING - FUNCIONANDO
-
-PUT MAPPING - CRIADO (PRECISA DE ALTERAÇÕES PARA FUNCIONAR A EDIÇÃO POR ID)
-
-DELETE MAPPING - CRIADO (PRECISA DE ALTERAÇÕES PARA FUNCIONAR A EXCLUSÃO POR ID)
 
 
 
 ITEM MAGICO:
 
-path: http://localhost:8080/itemMagico
 
-MODEL - CRIADO
+GET MAPPING - FUNCIONANDO -> path: http://localhost:8080/itemMagico
 
-SERVICE - 
+GET MAPPING POR ID - FUNCIONANDO -> path: http://localhost:8080/itemMagico/{id}
 
-CONTROLLER - 
+POST MAPPING - FUNCIONANDO -> path: http://localhost:8080/itemMagico
 
-REPOSITORY - CRIADO
+PUT MAPPING - FUNCIONANDO -> path: http://localhost:8080/itemMagico/{id}
 
-GET MAPPING - 
-
-GET MAPPING POR ID -
-
-POST MAPPING - 
-
-PUT MAPPING - 
-
-DELETE MAPPING - 
+DELETE MAPPING - FUNCIONANDO -> path: http://localhost:8080/itemMagico/{id}
