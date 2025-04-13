@@ -1,5 +1,7 @@
 PERSONAGENS
+
 -EXEMPLO:
+
 {
 
   "nome": "Leonas",
@@ -32,7 +34,9 @@ DELETE MAPPING - FUNCIONANDO -> path: http://localhost:8080/personagem/{id}
 --------------------------------------------------------------------------------------
 
 ITEM MAGICO
+
 -EXEMPLO:
+
 {  
 
   "nome": "ARCO", 
